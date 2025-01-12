@@ -1,8 +1,28 @@
 require "nvchad.mappings"
 
-local map = vim.keymap.set
 
+local map = vim.keymap.set
+--#region Basic mappings
+-- Функция для проверки модификации файла и запроса на сохранение перед выходом
+local function check_save_and_quit()
+  if vim.bo.modified then
+    local choice = vim.fn.input("Сохранить файл? Yes[y] No[n] Cancel[c]: ")
+    if choice == 'y' then
+      vim.cmd('w')
+      vim.cmd('q')
+    elseif choice == 'n' then
+      vim.cmd('q!')
+    else
+      print('Отмена выхода')
+    end
+  else
+    vim.cmd('q')
+  end
+end
+
+-- Установка маппинга для выхода
 map("i", "jk", "<ESC>")
+map("n", "<C-e>", check_save_and_quit, { desc = "Quit with save prompt" })
 
 --#region Terminal
 map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })

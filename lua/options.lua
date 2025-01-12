@@ -7,5 +7,12 @@ o.cursorlineopt ='both' -- to enable cursorline!
 o.number = true
 o.relativenumber = true
 o.showmode = false
-o.list = true
+-- o.list = true
+-- o.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+--#endregion
+
+--#region Tabs
+o.expandtab = true
+o.tabstop = 2
+
 --#endregion
